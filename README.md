@@ -14,7 +14,7 @@
 ```
 
 ## 使用
-直接直接启动容器
+直接启动容器
 ```shell
 docker compose up -d
 ```
