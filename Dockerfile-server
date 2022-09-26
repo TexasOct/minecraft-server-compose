@@ -1,0 +1,19 @@
+FROM openjdk:17.0.2-slim-bullseye
+
+ENV MAX_RAM=16384M \
+    MIN_RAM=1024M \
+    VERSION=1.18.2 \
+    MOD_LOADER=farbic \
+    SERVER_PATH=/opt/minecraft
+
+RUN mkdir $SERVER_PATH \
+    && apt update \
+    && apt install bash -y
+
+COPY depends/build.sh $SERVER_PATH
+COPY depends/${MOD_LOADER}.jar $SERVER_PATH
+
+WORKDIR $SERVER_PATH
+RUN bash ${SERVER_PATH}/build.sh
+
+CMD sh ${SERVER_PATH}/run.sh

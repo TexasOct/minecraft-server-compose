@@ -1,0 +1,15 @@
+version: "3.8"
+services:
+  server:
+    build:
+      dockerfile: Dockerfile-server
+      args:
+        - http_proxy=http://proxyserver:port
+        - https_proxy=http://proxyserver:port
+    ports:
+      - "25565:25565" # server port
+      - "25575:25575" # mcrcon port
+    volumes:
+      - "./world:/opt/minecraft/world"
+      - "./mods:/opt/minecraft/mods"
+      - "./server.properties:/opt/minecraft/server.properties"
